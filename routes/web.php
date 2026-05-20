@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/welcome', function () {
+Route::get('/welcome/{category?}', function ($category=null) {
+    if(isset($category)){
+        //return '<h1>'.$category.'</h1>';
+        return "<h1>{$category}</h1>";
+    }
     return view('index');
 })->name('welcome');
 

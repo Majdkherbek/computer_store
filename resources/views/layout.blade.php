@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>welcome page</title>
 
-    <!-- ربط ملف CSS الخارجي -->
+    
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="@yield('body-class')">
-    <!-- شريط الأدوات -->
+   
     <header class="toolbar">
 
         <a href="{{ route('welcome') }}">
