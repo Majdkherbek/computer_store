@@ -14,7 +14,7 @@
    
     <header class="toolbar">
 
-        <a href="{{ route('welcome') }}">
+        <a href="{{ route('welcome') }}">//->name of page
 
             <button>
                 welcome 
@@ -22,7 +22,7 @@
 
         </a>
 
-        <a href="{{ route('computers') }}">
+        <a href="{{ route('computers') }}">//->name of page
 
             <button>
                  computers
@@ -31,7 +31,7 @@
         </a>
 
 
-        <a href="{{ route('create') }}">
+        <a href="{{ route('create') }}">//->name of page
 
             <button>
                 create computer
@@ -39,7 +39,7 @@
 
         </a>
 
-        <a href="{{ route('contact') }}">
+        <a href="{{ route('contact') }}">//->name of page
 
             <button>
                 contact us

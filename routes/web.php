@@ -1,28 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaticController;
+Route::get('/welcome/{category?}',[StaticController::class, 'welcome'] )->name('welcome');
 
-Route::get('/welcome/{category?}', function ($category=null) {
-    if(isset($category)){
-        //return '<h1>'.$category.'</h1>';
-        return "<h1>{$category}</h1>";
-    }
-    return view('index');
-})->name('welcome');
+Route::get('/contact',[StaticController::class, 'contact'] )->name('contact');
 
+Route::get('/create',[StaticController::class, 'create'])->name('create');
 
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-
-
-Route::get('/create', function () {
-    return view('create');
-})->name('create');
-
-
-Route::get('/computers', function () {
-    return view('computers');
-})->name('computers');
+Route::get('/computers',[StaticController::class, 'computer'])->name('computers');
