@@ -2172,18 +2172,7 @@ body{
     transform: scale(1.05);
 }
 
-/* القسم الأوسط */
-.hero-section{
-    height: calc(100vh - 80px);
 
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
 
 /* العنوان الرئيسي */
 .main-title{

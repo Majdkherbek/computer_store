@@ -12,17 +12,21 @@ body{
     font-family: Arial, sans-serif;
     background: #f4f4f4;
     height: 100vh;
+    
 }
 
 /* شريط الأدوات */
 .toolbar{
-    background: #222;
+    background: hwb(244 7% 82%);
     padding: 15px;
 
     display: flex;
     justify-content: center;
     gap: 12px;
+    border: #222 solid 5px;
+    border-radius: 10px;
 }
+
 
 /* الأزرار */
 .toolbar button{
@@ -46,23 +50,12 @@ body{
     transform: scale(1.05);
 }
 
-/* القسم الأوسط */
-.hero-section{
-    height: calc(100vh - 80px);
 
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
 
 /* العنوان الرئيسي */
 .main-title{
     font-size: 55px;
-    color: #222;
+    color:white;
 
     margin-bottom: 15px;
 
@@ -72,7 +65,7 @@ body{
 /* النص الفرعي */
 .sub-title{
     font-size: 24px;
-    color: gold;
+    color:white;
 
     font-weight: bold;
 }
@@ -117,7 +110,7 @@ body{
 
 /* تصميم الفورم */
 .computer-form{
-    background: white;
+    background: rgb(213, 214, 225);
 
     width: 400px;
 
@@ -225,23 +218,24 @@ body{
 
     font-size: 40px;
 
-    color: #222;
+    color: #f1ebeb;
 }
 
 /* الحاوية */
 
-.computers-container{
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-    gap: 20px;
+/* ترتيب بطاقات الحواسيب أفقيًا */
+.computers-container {
+    display: flex;       
+    flex-wrap: wrap;   
+    gap: 20px;           
+    justify-content: center; 
 }
+
 
 /* كرت الحاسوب */
 
 .computer-card{
-    background: white;
+    background: rgb(255, 255, 255);
 
     padding: 20px;
 
@@ -250,6 +244,7 @@ body{
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
     transition: 0.3s;
+    
 }
 
 /* تأثير hover */
@@ -272,4 +267,79 @@ body{
     margin-bottom: 10px;
 
     font-size: 18px;
+}
+
+.hero-section {
+    
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+
+    min-height: calc(100vh - 60px); 
+    text-align: center;
+}
+
+
+.hero-section * {
+    direction: rtl;
+}
+
+/* فقط لصفحة Welcome */
+.hero-section {
+    
+    min-height: calc(100vh - 60px); /* يغطي كل الشاشة بدون toolbar */
+    
+    /* الخلفية */
+    background-image: url('C:\Users\ML\Downloads\welc.jpg'); /* ضع رابط الصورة هنا */
+    background-size: cover; /* لتغطية كامل المنطقة */
+    background-position: center; /* لتوسيط الخلفية */
+    background-repeat: no-repeat;
+    
+}
+/* خلفية صفحة welcome */
+.welcome-page .hero-section {
+    background-image: url('img/welc.jpg');
+    background-size: cover;
+    background-position: center;
+    
+}
+
+/* خلفية صفحة computers */
+.computers-page .hero-section {
+    background-image: url('img/com\ bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* خلفية صفحة contact */
+.contact-page .hero-section {
+    background-image: url('img/contact.jpg');
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.create-page .hero-section {
+    background-image: url('img/form\ dg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.welcome-text{
+    background: linear-gradient(
+    to bottom,
+    #E6C79C,
+    #D8B384
+);
+    border: black 4px solid ;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+
+    
 }

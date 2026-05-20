@@ -1,12 +1,16 @@
 
 @extends('layout')
-
+@section('body-class', 'contact-page')
 @section('title', 'contact')
 
 @section('content')
-        <h1 class="main-title">
-            أهلاً بك في صفحة الدعم
-        </h1>
+        <div class="welcome-text">
+            <h1 class="main-title">
+                أهلاً بك في صفحة الدعم
+            </h1>
+
+        </div>
+
 
         <p class="sub-title">
             تواصل معنا عبر الروابط التالية

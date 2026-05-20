@@ -1,6 +1,6 @@
 
 @extends('layout')
-
+@section('body-class', 'computers-page')
 @section('title', 'contact')
 
 

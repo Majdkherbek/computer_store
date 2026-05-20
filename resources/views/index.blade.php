@@ -1,5 +1,6 @@
 
 @extends('layout')
+@section('body-class', 'welcome-page')
 
 @section('title', 'welcome')
 

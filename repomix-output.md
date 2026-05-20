@@ -2201,23 +2201,12 @@ body{
     transform: scale(1.05);
 }
 
-/* القسم الأوسط */
-.hero-section{
-    height: calc(100vh - 80px);
 
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
 
 /* العنوان الرئيسي */
 .main-title{
     font-size: 55px;
-    color: #222;
+    color: rgb(42, 65, 161);
 
     margin-bottom: 15px;
 
@@ -4668,19 +4657,24 @@ body{
     transform: scale(1.05);
 }
 
-/* القسم الأوسط */
-.hero-section{
-    height: calc(100vh - 80px);
-
+/* للـ hero-section فقط */
+.hero-section {
+    margin-top: 60px; /* المسافة أسفل toolbar */
+    
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* ترتيب العناصر عمودي */
+    justify-content: center; /* محاذاة عمودي في منتصف الشاشة */
+    align-items: center;     /* محاذاة أفقي في منتصف الصفحة */
 
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
+    min-height: calc(100vh - 60px); /* ارتفاع hero-section = ارتفاع الشاشة - toolbar */
+    text-align: center; /* يضع النصوص في الوسط */
+    direction: ltr; /* هذه النقطة مهمة لتجنب الالتصاق باليمين */
 }
 
+/* للحفاظ على RTL داخل النصوص فقط */
+.hero-section * {
+    direction: rtl;
+}
 /* العنوان الرئيسي */
 .main-title{
     font-size: 55px;

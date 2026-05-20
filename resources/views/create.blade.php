@@ -1,6 +1,6 @@
 
 @extends('layout')
-
+@section('body-class', 'create-page')
 @section('title', 'create')
 
 @section('content')
