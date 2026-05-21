@@ -11,7 +11,17 @@ class ComputerController extends Controller
      */
     public function index()
     {
-        return view('com-docs.com-1');
+        return view('com-docs.com-1' , [
+            'com_s_data'=>self::getData()
+        ]);
+    }
+    private static function getData(){
+        return [
+            ['id'=>'1' , 'origin'=>'usa' , 'name'=>'hp' , 'price'=>'800$'] ,
+            ['id'=>'2' , 'origin'=>'canda' , 'name'=>'dell' , 'price'=>'950$'] ,
+            ['id'=>'3' , 'origin'=>'china' , 'name'=>'lenovo' , 'price'=>'1100$'] ,
+            ['id'=>'4' , 'origin'=>'taiwan' , 'name'=>'asus' , 'price'=>'1500$']
+        ];
     }
 
     /**
