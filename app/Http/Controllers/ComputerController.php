@@ -11,8 +11,8 @@ class ComputerController extends Controller
      */
     public function index()
     {
-        return view('com-docs.com-1' , [
-            'com_s_data'=>self::getData()
+        return view('com-docs.index' , [
+            'com_docs'=>self::getData()
         ]);
     }
     private static function getData(){
@@ -45,7 +45,17 @@ class ComputerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $com_docs = self::getData();
+
+        $index = array_search($id, array_column($com_docs, 'id'));
+
+        if ($index === false) {
+            abort(404);
+        }
+
+        return view('com-docs.show', [
+            'com_data' => $com_docs[$index]
+        ]);
     }
 
     /**

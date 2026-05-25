@@ -6,9 +6,6 @@
 
 
 @section('content')
-        <h1 class="computers-title">
-            قائمة الحواسيب
-        </h1>
 
         <div class="computers-container">
 

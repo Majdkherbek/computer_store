@@ -1,51 +1,48 @@
-This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
 
-<file_summary>
-This section contains a summary of this file.
+# File Summary
 
-<purpose>
-This file contains a packed representation of the entire repository's contents.
+## Purpose
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
 It is designed to be easily consumable by AI systems for analysis, code review,
 or other automated processes.
-</purpose>
 
-<file_format>
+## File Format
 The content is organized as follows:
 1. This summary section
 2. Repository information
 3. Directory structure
 4. Repository files (if enabled)
 5. Multiple file entries, each consisting of:
-  - File path as an attribute
-  - Full contents of the file
-</file_format>
+  a. A header with the file path (## File: path/to/file)
+  b. The full contents of the file in a code block
 
-<usage_guidelines>
+## Usage Guidelines
 - This file should be treated as read-only. Any changes should be made to the
   original repository files, not this packed version.
 - When processing this file, use the file path to distinguish
   between different files in the repository.
 - Be aware that this file may contain sensitive information. Handle it with
   the same level of security as you would the original repository.
-</usage_guidelines>
 
-<notes>
+## Notes
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: vendor, node_modules, storage
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Files are sorted by Git change count (files with more changes are at the bottom)
-</notes>
 
-</file_summary>
-
-<directory_structure>
+# Directory Structure
+```
 .editorconfig
 .env.example
 .gitattributes
 .gitignore
 .npmrc
+app/Http/Controllers/ComputerController.php
 app/Http/Controllers/Controller.php
+app/Http/Controllers/StaticController.php
 app/Models/User.php
 app/Providers/AppServiceProvider.php
 artisan
@@ -73,12 +70,18 @@ package.json
 phpunit.xml
 public/.htaccess
 public/favicon.ico
+public/img/com bg.jpg
+public/img/contact.jpg
+public/img/form dg.jpg
+public/img/welc.jpg
 public/index.php
 public/robots.txt
 public/style.css
 README.md
 resources/css/app.css
 resources/js/app.js
+resources/views/com-docs/com-1.blade.php
+resources/views/com-docs/show.blade.php
 resources/views/computers.blade.php
 resources/views/contact.blade.php
 resources/views/create.blade.php
@@ -86,26 +89,36 @@ resources/views/index.blade.php
 resources/views/layout.blade.php
 routes/console.php
 routes/web.php
-storage/app/.gitignore
-storage/app/private/.gitignore
-storage/app/public/.gitignore
-storage/framework/.gitignore
-storage/framework/cache/.gitignore
-storage/framework/cache/data/.gitignore
-storage/framework/sessions/.gitignore
-storage/framework/testing/.gitignore
-storage/framework/views/.gitignore
-storage/logs/.gitignore
 tests/Feature/ExampleTest.php
 tests/TestCase.php
 tests/Unit/ExampleTest.php
 vite.config.js
-</directory_structure>
+```
 
-<files>
-This section contains the contents of the repository's files.
+# Files
 
-<file path=".editorconfig">
+## File: resources/views/com-docs/show.blade.php
+````php
+<div>
+    @if(count($com_s_data)>0)
+    @foreach($com_s_data as $com_data)
+    <a href="{{ route('com-docs.show', $com_data['id']) }}">
+        <li>
+                {{ $com_data['name'] }} origin country {{ $com_data['origin'] }}
+
+        </li>
+    </a>
+    @endforeach
+    @else
+    <p>
+        there are no computers
+    </p>
+    @endif
+</div>
+````
+
+## File: .editorconfig
+````
 root = true
 
 [*]
@@ -124,9 +137,10 @@ indent_size = 2
 
 [{compose,docker-compose}.{yml,yaml}]
 indent_size = 4
-</file>
+````
 
-<file path=".env.example">
+## File: .env.example
+````
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=
@@ -192,9 +206,10 @@ AWS_BUCKET=
 AWS_USE_PATH_STYLE_ENDPOINT=false
 
 VITE_APP_NAME="${APP_NAME}"
-</file>
+````
 
-<file path=".gitattributes">
+## File: .gitattributes
+````
 * text=auto eol=lf
 
 *.blade.php diff=html
@@ -206,9 +221,10 @@ VITE_APP_NAME="${APP_NAME}"
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
-</file>
+````
 
-<file path=".gitignore">
+## File: .gitignore
+````
 *.log
 .DS_Store
 .env
@@ -236,14 +252,16 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
-</file>
+````
 
-<file path=".npmrc">
+## File: .npmrc
+````
 ignore-scripts=true
 audit=true
-</file>
+````
 
-<file path="app/Http/Controllers/Controller.php">
+## File: app/Http/Controllers/Controller.php
+````php
 <?php
 
 namespace App\Http\Controllers;
@@ -252,9 +270,42 @@ abstract class Controller
 {
     //
 }
-</file>
+````
 
-<file path="app/Models/User.php">
+## File: app/Http/Controllers/StaticController.php
+````php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class StaticController extends Controller
+{
+   public function contact () {
+    return view('contact');
+}
+
+ public function create () {
+    return view('create');
+}
+
+ public function computer () {
+    return view('computers');
+}
+
+public function welcome ($category=null) {
+    if(isset($category)){
+        //return '<h1>'.$category.'</h1>';
+        return "<h1>{$category}</h1>";
+    }
+    return view('index');
+}
+}
+````
+
+## File: app/Models/User.php
+````php
 <?php
 
 namespace App\Models;
@@ -287,9 +338,10 @@ class User extends Authenticatable
         ];
     }
 }
-</file>
+````
 
-<file path="app/Providers/AppServiceProvider.php">
+## File: app/Providers/AppServiceProvider.php
+````php
 <?php
 
 namespace App\Providers;
@@ -314,9 +366,10 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
-</file>
+````
 
-<file path="artisan">
+## File: artisan
+````
 #!/usr/bin/env php
 <?php
 
@@ -335,9 +388,10 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 $status = $app->handleCommand(new ArgvInput);
 
 exit($status);
-</file>
+````
 
-<file path="bootstrap/app.php">
+## File: bootstrap/app.php
+````php
 <?php
 
 use Illuminate\Foundation\Application;
@@ -356,14 +410,16 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
-</file>
+````
 
-<file path="bootstrap/cache/.gitignore">
+## File: bootstrap/cache/.gitignore
+````
 *
 !.gitignore
-</file>
+````
 
-<file path="bootstrap/providers.php">
+## File: bootstrap/providers.php
+````php
 <?php
 
 use App\Providers\AppServiceProvider;
@@ -371,9 +427,10 @@ use App\Providers\AppServiceProvider;
 return [
     AppServiceProvider::class,
 ];
-</file>
+````
 
-<file path="composer.json">
+## File: composer.json
+````json
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
@@ -460,9 +517,10 @@ return [
     "minimum-stability": "stable",
     "prefer-stable": true
 }
-</file>
+````
 
-<file path="config/app.php">
+## File: config/app.php
+````php
 <?php
 
 return [
@@ -589,9 +647,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/auth.php">
+## File: config/auth.php
+````php
 <?php
 
 use App\Models\User;
@@ -709,9 +768,10 @@ return [
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];
-</file>
+````
 
-<file path="config/cache.php">
+## File: config/cache.php
+````php
 <?php
 
 use Illuminate\Support\Str;
@@ -842,9 +902,10 @@ return [
     'serializable_classes' => false,
 
 ];
-</file>
+````
 
-<file path="config/database.php">
+## File: config/database.php
+````php
 <?php
 
 use Illuminate\Support\Str;
@@ -1029,9 +1090,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/filesystems.php">
+## File: config/filesystems.php
+````php
 <?php
 
 return [
@@ -1112,9 +1174,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/logging.php">
+## File: config/logging.php
+````php
 <?php
 
 use Monolog\Handler\NullHandler;
@@ -1247,9 +1310,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/mail.php">
+## File: config/mail.php
+````php
 <?php
 
 return [
@@ -1368,9 +1432,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/queue.php">
+## File: config/queue.php
+````php
 <?php
 
 return [
@@ -1500,9 +1565,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/services.php">
+## File: config/services.php
+````php
 <?php
 
 return [
@@ -1541,9 +1607,10 @@ return [
     ],
 
 ];
-</file>
+````
 
-<file path="config/session.php">
+## File: config/session.php
+````php
 <?php
 
 use Illuminate\Support\Str;
@@ -1777,13 +1844,15 @@ return [
     'serialization' => 'json',
 
 ];
-</file>
+````
 
-<file path="database/.gitignore">
+## File: database/.gitignore
+````
 *.sqlite*
-</file>
+````
 
-<file path="database/factories/UserFactory.php">
+## File: database/factories/UserFactory.php
+````php
 <?php
 
 namespace Database\Factories;
@@ -1829,9 +1898,10 @@ class UserFactory extends Factory
         ]);
     }
 }
-</file>
+````
 
-<file path="database/migrations/0001_01_01_000000_create_users_table.php">
+## File: database/migrations/0001_01_01_000000_create_users_table.php
+````php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -1881,9 +1951,10 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
-</file>
+````
 
-<file path="database/migrations/0001_01_01_000001_create_cache_table.php">
+## File: database/migrations/0001_01_01_000001_create_cache_table.php
+````php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -1919,9 +1990,10 @@ return new class extends Migration
         Schema::dropIfExists('cache_locks');
     }
 };
-</file>
+````
 
-<file path="database/migrations/0001_01_01_000002_create_jobs_table.php">
+## File: database/migrations/0001_01_01_000002_create_jobs_table.php
+````php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -1981,9 +2053,10 @@ return new class extends Migration
         Schema::dropIfExists('failed_jobs');
     }
 };
-</file>
+````
 
-<file path="database/seeders/DatabaseSeeder.php">
+## File: database/seeders/DatabaseSeeder.php
+````php
 <?php
 
 namespace Database\Seeders;
@@ -2009,9 +2082,10 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
-</file>
+````
 
-<file path="package.json">
+## File: package.json
+````json
 {
     "$schema": "https://www.schemastore.org/package.json",
     "private": true,
@@ -2028,9 +2102,10 @@ class DatabaseSeeder extends Seeder
         "vite": "^8.0.0"
     }
 }
-</file>
+````
 
-<file path="phpunit.xml">
+## File: phpunit.xml
+````xml
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
@@ -2067,9 +2142,10 @@ class DatabaseSeeder extends Seeder
         <env name="NIGHTWATCH_ENABLED" value="false"/>
     </php>
 </phpunit>
-</file>
+````
 
-<file path="public/.htaccess">
+## File: public/.htaccess
+````
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -2095,9 +2171,10 @@ class DatabaseSeeder extends Seeder
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-</file>
+````
 
-<file path="public/index.php">
+## File: public/index.php
+````php
 <?php
 
 use Illuminate\Foundation\Application;
@@ -2118,14 +2195,277 @@ require __DIR__.'/../vendor/autoload.php';
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $app->handleRequest(Request::capture());
-</file>
+````
 
-<file path="public/robots.txt">
+## File: public/robots.txt
+````
 User-agent: *
 Disallow:
-</file>
+````
 
-<file path="public/style.css">
+## File: README.md
+````markdown
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
+
+## About Laravel
+
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+## Learning Laravel
+
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+
+## Agentic Development
+
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+
+```bash
+composer require laravel/boost --dev
+
+php artisan boost:install
+```
+
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+````
+
+## File: resources/css/app.css
+````css
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+````
+
+## File: resources/js/app.js
+````javascript
+//
+````
+
+## File: routes/console.php
+````php
+<?php
+
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
+
+Artisan::command('inspire', function () {
+    $this->comment(Inspiring::quote());
+})->purpose('Display an inspiring quote');
+````
+
+## File: tests/Feature/ExampleTest.php
+````php
+<?php
+
+namespace Tests\Feature;
+
+// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic test example.
+     */
+    public function test_the_application_returns_a_successful_response(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+}
+````
+
+## File: tests/TestCase.php
+````php
+<?php
+
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
+{
+    //
+}
+````
+
+## File: tests/Unit/ExampleTest.php
+````php
+<?php
+
+namespace Tests\Unit;
+
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic test example.
+     */
+    public function test_that_true_is_true(): void
+    {
+        $this->assertTrue(true);
+    }
+}
+````
+
+## File: vite.config.js
+````javascript
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { bunny } from 'laravel-vite-plugin/fonts';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+            fonts: [
+                bunny('Instrument Sans', {
+                    weights: [400, 500, 600],
+                }),
+            ],
+        }),
+        tailwindcss(),
+    ],
+    server: {
+        watch: {
+            ignored: ['**/storage/framework/views/**'],
+        },
+    },
+});
+````
+
+## File: app/Http/Controllers/ComputerController.php
+````php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ComputerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('com-docs.com-1' , [
+            'com_s_data'=>self::getData()
+        ]);
+    }
+    private static function getData(){
+        return [
+            ['id'=>'1' , 'origin'=>'usa' , 'name'=>'hp' , 'price'=>'800$'] ,
+            ['id'=>'2' , 'origin'=>'canda' , 'name'=>'dell' , 'price'=>'950$'] ,
+            ['id'=>'3' , 'origin'=>'china' , 'name'=>'lenovo' , 'price'=>'1100$'] ,
+            ['id'=>'4' , 'origin'=>'taiwan' , 'name'=>'asus' , 'price'=>'1500$']
+        ];
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $com_s_data = self::getData();
+        $index=array_search($id, array_column($com_s_data, 'id'));
+        return view ('com-docs.show', [
+            'com_data'=>$com_s_data[$index]
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
+````
+
+## File: public/style.css
+````css
 /* إعادة ضبط بسيطة */
 *{
     margin: 0;
@@ -2138,17 +2478,21 @@ body{
     font-family: Arial, sans-serif;
     background: #f4f4f4;
     height: 100vh;
+    
 }
 
 /* شريط الأدوات */
 .toolbar{
-    background: #222;
+    background: hwb(244 7% 82%);
     padding: 15px;
 
     display: flex;
     justify-content: center;
     gap: 12px;
+    border: #222 solid 5px;
+    border-radius: 10px;
 }
+
 
 /* الأزرار */
 .toolbar button{
@@ -2177,7 +2521,7 @@ body{
 /* العنوان الرئيسي */
 .main-title{
     font-size: 55px;
-    color: #222;
+    color:white;
 
     margin-bottom: 15px;
 
@@ -2187,7 +2531,7 @@ body{
 /* النص الفرعي */
 .sub-title{
     font-size: 24px;
-    color: gold;
+    color:white;
 
     font-weight: bold;
 }
@@ -2232,7 +2576,7 @@ body{
 
 /* تصميم الفورم */
 .computer-form{
-    background: white;
+    background: rgb(213, 214, 225);
 
     width: 400px;
 
@@ -2340,23 +2684,24 @@ body{
 
     font-size: 40px;
 
-    color: #222;
+    color: #f1ebeb;
 }
 
 /* الحاوية */
 
-.computers-container{
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-    gap: 20px;
+/* ترتيب بطاقات الحواسيب أفقيًا */
+.computers-container {
+    display: flex;       
+    flex-wrap: wrap;   
+    gap: 20px;           
+    justify-content: center; 
 }
+
 
 /* كرت الحاسوب */
 
 .computer-card{
-    background: white;
+    background: rgb(255, 255, 255);
 
     padding: 20px;
 
@@ -2365,6 +2710,7 @@ body{
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
     transition: 0.3s;
+    
 }
 
 /* تأثير hover */
@@ -2388,95 +2734,123 @@ body{
 
     font-size: 18px;
 }
-</file>
 
-<file path="README.md">
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+.hero-section {
+    
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-</file>
-
-<file path="resources/css/app.css">
-@import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    min-height: calc(100vh - 60px); 
+    text-align: center;
 }
-</file>
 
-<file path="resources/js/app.js">
-//
-</file>
 
-<file path="resources/views/computers.blade.php">
+.hero-section * {
+    direction: rtl;
+}
+
+/* فقط لصفحة Welcome */
+.hero-section {
+    
+    min-height: calc(100vh - 60px); /* يغطي كل الشاشة بدون toolbar */
+    
+    /* الخلفية */
+    background-image: url('C:\Users\ML\Downloads\welc.jpg'); /* ضع رابط الصورة هنا */
+    background-size: cover; /* لتغطية كامل المنطقة */
+    background-position: center; /* لتوسيط الخلفية */
+    background-repeat: no-repeat;
+    
+}
+/* خلفية صفحة welcome */
+.welcome-page .hero-section {
+    background-image: url('img/welc.jpg');
+    background-size: cover;
+    background-position: center;
+    
+}
+
+/* خلفية صفحة computers */
+.computers-page .hero-section {
+    background-image: url('img/com\ bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* خلفية صفحة contact */
+.contact-page .hero-section {
+    background-image: url('img/contact.jpg');
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.create-page .hero-section {
+    background-image: url('img/form\ dg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.welcome-text{
+    background: linear-gradient(
+    to bottom,
+    #E6C79C,
+    #D8B384
+);
+    border: black 4px solid ;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+
+    
+}
+````
+
+## File: resources/views/com-docs/com-1.blade.php
+````php
+<h1>computers</h1>
+@if (count($com_s_data)>0)
+    <ul>
+        @foreach($com_s_data as $com_data)
+
+            <li>
+                {{ $com_data['name'] }}
+
+                <a href="{{ route('com-docs.show', ['com_doc' => $com_data['id']]) }}">
+                    View
+                </a>
+            </li>
+
+        @endforeach
+    </ul>
+@else
+<p>no more computers</p>
+@endif
+````
+
+## File: resources/views/computers.blade.php
+````php
 @extends('layout')
-
+@section('body-class', 'computers-page')
 @section('title', 'contact')
-        <h1 class="computers-title">
-            قائمة الحواسيب
-        </h1>
 
+
+
+@section('content')
+@foreach($com_s_data as $com_data)
+
+    <div>
+        <a href="{{ route('com-docs.show', $com_data['id']) }}">
+            show {{ $com_data['name'] }}
+        </a>
+    </div>
+
+@endforeach
         <div class="computers-container">
 
             <!-- كرت 1 -->
@@ -2524,21 +2898,23 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
             </div>
 
         </div>
-
-@section('content')
-
 @endsection
-</file>
+````
 
-<file path="resources/views/contact.blade.php">
+## File: resources/views/contact.blade.php
+````php
 @extends('layout')
-
+@section('body-class', 'contact-page')
 @section('title', 'contact')
 
 @section('content')
-        <h1 class="main-title">
-            أهلاً بك في صفحة الدعم
-        </h1>
+        <div class="welcome-text">
+            <h1 class="main-title">
+                أهلاً بك في صفحة الدعم
+            </h1>
+
+        </div>
+
 
         <p class="sub-title">
             تواصل معنا عبر الروابط التالية
@@ -2556,11 +2932,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
         </div>
 @endsection
-</file>
+````
 
-<file path="resources/views/create.blade.php">
+## File: resources/views/create.blade.php
+````php
 @extends('layout')
-
+@section('body-class', 'create-page')
 @section('title', 'create')
 
 @section('content')
@@ -2618,10 +2995,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
         </form>
 @endsection
-</file>
+````
 
-<file path="resources/views/index.blade.php">
+## File: resources/views/index.blade.php
+````php
 @extends('layout')
+@section('body-class', 'welcome-page')
 
 @section('title', 'welcome')
 
@@ -2634,9 +3013,28 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
             نتمنى لك تجربة رائعة داخل الموقع
         </p>
 @endsection
-</file>
+````
 
-<file path="resources/views/layout.blade.php">
+## File: routes/web.php
+````php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaticController;
+use App\Http\Controllers\ComputerController;
+Route::get('/welcome/{category?}',[StaticController::class, 'welcome'] )->name('welcome');
+
+Route::get('/contact',[StaticController::class, 'contact'] )->name('contact');
+
+Route::get('/create',[StaticController::class, 'create'])->name('create');
+
+Route::get('/computers',[StaticController::class, 'computer'])->name('computers');
+
+Route::resource('com-docs',ComputerController::class);
+````
+
+## File: resources/views/layout.blade.php
+````php
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -2645,13 +3043,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>welcome page</title>
 
-    <!-- ربط ملف CSS الخارجي -->
+    
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
-    <!-- شريط الأدوات -->
+<body class="@yield('body-class')">
+   
     <header class="toolbar">
 
         <a href="{{ route('welcome') }}">
@@ -2663,6 +3060,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
         </a>
 
         <a href="{{ route('computers') }}">
+        
 
             <button>
                  computers
@@ -2690,6 +3088,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     </header>
 
 
+
     <!-- القسم الأوسط -->
     <main class="hero-section">
         @yield('content')
@@ -2699,185 +3098,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 </body>
 
 </html>
-</file>
-
-<file path="routes/console.php">
-<?php
-
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
-
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
-</file>
-
-<file path="routes/web.php">
-<?php
-
-use Illuminate\Support\Facades\Route;
-
-Route::get('/welcome', function () {
-    return view('index');
-})->name('welcome');
-
-
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-
-
-Route::get('/create', function () {
-    return view('create');
-})->name('create');
-
-
-Route::get('/computers', function () {
-    return view('computers');
-})->name('computers');
-</file>
-
-<file path="storage/app/.gitignore">
-*
-!private/
-!public/
-!.gitignore
-</file>
-
-<file path="storage/app/private/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/app/public/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/framework/.gitignore">
-compiled.php
-config.php
-down
-events.scanned.php
-maintenance.php
-routes.php
-routes.scanned.php
-schedule-*
-services.json
-</file>
-
-<file path="storage/framework/cache/.gitignore">
-*
-!data/
-!.gitignore
-</file>
-
-<file path="storage/framework/cache/data/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/framework/sessions/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/framework/testing/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/framework/views/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="storage/logs/.gitignore">
-*
-!.gitignore
-</file>
-
-<file path="tests/Feature/ExampleTest.php">
-<?php
-
-namespace Tests\Feature;
-
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-}
-</file>
-
-<file path="tests/TestCase.php">
-<?php
-
-namespace Tests;
-
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-
-abstract class TestCase extends BaseTestCase
-{
-    //
-}
-</file>
-
-<file path="tests/Unit/ExampleTest.php">
-<?php
-
-namespace Tests\Unit;
-
-use PHPUnit\Framework\TestCase;
-
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_that_true_is_true(): void
-    {
-        $this->assertTrue(true);
-    }
-}
-</file>
-
-<file path="vite.config.js">
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import { bunny } from 'laravel-vite-plugin/fonts';
-import tailwindcss from '@tailwindcss/vite';
-
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-            fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
-                }),
-            ],
-        }),
-        tailwindcss(),
-    ],
-    server: {
-        watch: {
-            ignored: ['**/storage/framework/views/**'],
-        },
-    },
-});
-</file>
-
-</files>
+````
