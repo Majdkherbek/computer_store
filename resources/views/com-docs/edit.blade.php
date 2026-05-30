@@ -5,8 +5,9 @@
 
 @section('content')
         
-        <form class="computer-form" action="{{route('com-docs.store')}}" method="post">
+        <form class="computer-form" action="{{route('com-docs.update',['com_doc' => $com_data->id])}}" method="post">
              @csrf
+             @method('PUT')
             <h1 class="form-title">
                 edit the details
             </h1>
