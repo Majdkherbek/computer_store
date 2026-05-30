@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Computer;
+
+
+
 class StaticController extends Controller
 {
    public function contact () {
@@ -14,8 +18,12 @@ class StaticController extends Controller
     return view('create');
 }
 
- public function computer () {
-    return view('computers');
+
+public function computer()
+{
+    return view('computers', [
+        'com_docs' => Computer::all()
+    ]);
 }
 
 public function welcome ($category=null) {

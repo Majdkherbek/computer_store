@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>welcome page</title>
+    <title>@yield('title')</title>
 
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
 </head>
 
 <body class="@yield('body-class')">
@@ -32,7 +32,7 @@
         </a>
 
 
-        <a href="{{ route('create') }}">
+        <a href="{{ route('com-docs.create') }}">
 
             <button>
                 create computer
