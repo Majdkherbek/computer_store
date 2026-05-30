@@ -44,7 +44,7 @@ class ComputerController extends Controller
         $computer->price = $request->input('computer-price') ;
 
         $computer->save();
-        return redirect()->route('com-docs.index');   
+        return redirect()->route('computers');   
     }
 
     /**
