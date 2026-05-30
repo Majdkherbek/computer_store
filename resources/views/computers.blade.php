@@ -30,7 +30,13 @@
                 Edit
                 </a>
             </div>
-
+            <div class="delete">
+                <form action="{{ route('com-docs.destroy', $com_data->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">delete</button>
+                </form>
+            </div>
 
         </div>
 

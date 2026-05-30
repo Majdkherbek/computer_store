@@ -117,8 +117,12 @@ public function update(Request $request, $computer)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($computer)
     {
-        //
+        $to_delete = Computer::findOrFail($computer);
+
+        $to_delete->delete();
+
+        return redirect()->route('com-docs.index');
     }
 }
