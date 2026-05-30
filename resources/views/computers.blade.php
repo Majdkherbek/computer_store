@@ -20,9 +20,17 @@
             <p>
                 السعر: {{ $com_data->price }}
             </p>
-            <a href="{{ route('com-docs.show', $com_data->id) }}">
-                عرض التفاصيل
-            </a>
+            <div class="details">
+                <a href="{{ route('com-docs.show', $com_data->id) }}">
+                Details
+                </a>
+            </div>
+            <div class="edit">
+                <a href="{{ route('com-docs.edit', $com_data->id) }}">
+                Edit
+                </a>
+            </div>
+
 
         </div>
 

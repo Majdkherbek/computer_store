@@ -87,7 +87,9 @@ class ComputerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('com-docs.edit',[
+            'com_data' => computer::findorfail($id)
+        ]);
     }
 
     /**
