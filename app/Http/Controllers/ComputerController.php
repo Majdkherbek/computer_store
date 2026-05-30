@@ -38,13 +38,21 @@ class ComputerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'computer-name' => 'required',
+            'computer-origin' => 'required',
+            'computer-price' => ['required','integer'],
+        ]
+
+        );
+
         $computer=new computer();
-        $computer->name = $request->input('computer-name') ;
-        $computer->origin = $request->input('computer-origin') ;
-        $computer->price = $request->input('computer-price') ;
+        $computer->name =strip_tags($request->input('computer-name'))  ;
+        $computer->origin =strip_tags($request->input('computer-origin')) ;
+        $computer->price =strip_tags($request->input('computer-price'))  ;
 
         $computer->save();
-        return redirect()->route('computers');   
+        return redirect()->route('com-docs.index');   
     }
 
     /**

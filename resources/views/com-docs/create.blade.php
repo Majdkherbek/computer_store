@@ -18,8 +18,10 @@
                     نوع الجهاز
                 </label>
 
-                <input type="text" placeholder="أدخل نوع الجهاز" name="computer-name">
-
+                <input type="text" placeholder="أدخل نوع الجهاز" name="computer-name" value="{{old('computer-name')}}">
+                @error('computer-name')
+                {{$message}}
+                @enderror
             </div>
 
             <!-- بلد المنشأ -->
@@ -29,8 +31,10 @@
                     بلد المنشأ
                 </label>
 
-                <input type="text" placeholder="أدخل بلد المنشأ" name="computer-origin">
-
+                <input type="text" placeholder="أدخل بلد المنشأ" name="computer-origin" value="{{old('computer-origin')}}">
+                @error('computer-origin')
+                {{$message}}
+                @enderror
             </div>
 
             <!-- السعر -->
@@ -40,8 +44,10 @@
                     السعر
                 </label>
 
-                <input type="number" placeholder="أدخل السعر" name="computer-price">
-
+                <input type="number" placeholder="أدخل السعر" name="computer-price" value="{{old('computer-price')}}">
+                @error('computer-price')
+                {{$message}}
+                @enderror
             </div>
 
             <!-- الأزرار -->
